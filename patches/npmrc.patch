@@ -1,0 +1,9 @@
+diff --git a/.npmrc b/.npmrc
+new file mode 100644
+index 00000000..21d3394e
+--- /dev/null
++++ b/.npmrc
+@@ -0,0 +1,2 @@
++node-linker=hoisted
++shamefully-hoist=true
+\ No newline at end of file

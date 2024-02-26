@@ -1,0 +1,7 @@
+build/*
+dist/*
+node_modules/*
+.history/*
+templates/*
+USAGE
+tsup.schema.json

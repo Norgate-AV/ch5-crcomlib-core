@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      new_release:
+        type: boolean
+        description: Force new Release
+      force_dispatch:
+        type: boolean
+        description: Force dispatch
+      dont_update:
+        type: boolean
+        description: Don't update
+
+  # schedule:
+  #   - cron: "0 18 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      APP_NAME: ch5-crcomlib-core
+      VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
+      CH5_LATEST: ${{ github.event.inputs.dont_update == 'true' && 'no' || 'yes' }}
+      SHOULD_BUILD: ${{ github.event.inputs.new_release == 'true' && 'yes' || 'no' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: "pnpm"
+
+      - name: Clone CH5ComponentLibrary Repository
+        run: . get_repo.sh
+
+      - name: Check existing CH5ComponentLibrary tags/releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEW_RELEASE: ${{ github.event.inputs.new_release }}
+          IS_SPEARHEAD: "yes"
+        run: . check_tags.sh
+
+      - name: Build
+        if: env.SHOULD_BUILD == 'yes'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./build.sh
+
+      - name: Update stable.json
+        if: env.SHOULD_BUILD == 'yes' && github.event.inputs.dont_update != 'true'
+        run: ./update_stablejson.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ github.repository_owner }}
