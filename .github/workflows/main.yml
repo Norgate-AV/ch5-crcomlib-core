@@ -6,9 +6,6 @@ on:
       new_release:
         type: boolean
         description: Force new Release
-      force_dispatch:
-        type: boolean
-        description: Force dispatch
       dont_update:
         type: boolean
         description: Don't update
