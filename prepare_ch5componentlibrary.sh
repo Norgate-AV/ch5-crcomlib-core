@@ -50,11 +50,12 @@ setpath_json() {
 # package.json
 cp package.json{,.bak}
 
+setpath "package" "name" "@norgate-av/ch5-crcomlib"
 setpath "package" "version" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\1/p")"
-setpath "package" "release" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\2/p")"
+# setpath "package" "release" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\2/p")"
 
 replace 's|Crestron|Norgate AV|' package.json
 
 cat package.json
 
-cd ..
+cd ${GITHUB_WORKSPACE} || ..

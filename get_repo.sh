@@ -66,7 +66,7 @@ echo "CH5_COMMIT=\"${CH5_COMMIT}\""
 git fetch --depth 1 origin "${CH5_COMMIT}"
 git checkout FETCH_HEAD
 
-cd ..
+cd ${GITHUB_WORKSPACE} || ..
 
 # for GH actions
 if [[ "${GITHUB_ENV}" ]]; then

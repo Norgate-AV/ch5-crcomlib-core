@@ -17,7 +17,8 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
 
     npm run build:prod_all
 
+    pwd
     ls -la ./dist
 
-    cd ..
+    cd ${GITHUB_WORKSPACE} || ..
 fi

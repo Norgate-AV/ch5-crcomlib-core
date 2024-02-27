@@ -33,5 +33,5 @@ echo "CHANGE=${CHANGES}"
 #         git push origin "${BRANCH_NAME}" --quiet
 #     fi
 # fi
-
-cd ..
+pwd
+# cd ..
