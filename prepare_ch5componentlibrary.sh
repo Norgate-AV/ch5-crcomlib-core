@@ -20,7 +20,7 @@ cd CH5ComponentLibrary || {
 for file in ../patches/*.patch; do
     if [[ -f "${file}" ]]; then
         echo applying patch: "${file}"
-        if ! git apply --ignore-whitespace "${file}"; then
+        if ! git apply --ignore-whitespace --verbose "${file}"; then
             echo failed to apply patch "${file}" >&2
             exit 1
         fi
@@ -50,8 +50,8 @@ setpath_json() {
 # package.json
 cp package.json{,.bak}
 
-setpath "package" "version" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)(-insider)?$/\1/p")"
-setpath "package" "release" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)(-insider)?$/\2/p")"
+setpath "package" "version" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\1/p")"
+setpath "package" "release" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\2/p")"
 
 replace 's|Crestron|Norgate AV|' package.json
 

@@ -54,9 +54,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./build.sh
 
-      - name: Update stable.json
+      - name: Update version.json
         if: env.SHOULD_BUILD == 'yes' && github.event.inputs.dont_update != 'true'
-        run: ./update_stablejson.sh
+        run: ./update_version.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
