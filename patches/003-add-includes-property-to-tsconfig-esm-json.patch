@@ -1,0 +1,14 @@
+diff --git a/tsconfig.esm.json b/tsconfig.esm.json
+index 93f88a6e..87c4fa30 100644
+--- a/tsconfig.esm.json
++++ b/tsconfig.esm.json
+@@ -7,5 +7,6 @@
+     "module": "es6",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+     "outDir": "./compiled_bundles/esm",               /* Redirect output structure to the directory. */
+     "declarationDir": "./compiled_bundles/esm"
+-  }
+-}
+\ No newline at end of file
++  },
++  "includes": ["src/**/*.ts"]
++}
