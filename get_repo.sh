@@ -25,11 +25,10 @@ if [[ -z "${RELEASE_VERSION}" ]]; then
         UPDATE_INFO=$(curl --silent --fail "https://registry.npmjs.org/@crestron/ch5-crcomlib/latest")
     else
         echo "Get version from version.json"
-        CH5_COMMIT=$(jq -r '.commit' version.json)
         CH5_VERSION=$(jq -r '.version' version.json)
     fi
 
-    [[ -z "${CH5_COMMIT}" ]] && CH5_COMMIT=$(echo "${UPDATE_INFO}" | jq -r '.commit')
+    [[ -z "${CH5_COMMIT}" ]] && CH5_COMMIT=$(jq -r '.commit' version.json)
     [[ -z "${CH5_VERSION}" ]] && CH5_VERSION=$(echo "${UPDATE_INFO}" | jq -r '.version')
 
     date=$(date +%Y%j)
