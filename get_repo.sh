@@ -60,26 +60,6 @@ cd CH5ComponentLibrary || {
 git init -q
 git remote add origin https://github.com/Crestron/CH5ComponentLibrary.git
 
-# figure out latest tag
-# if [[ -z "${CH5_VERSION}" ]]; then
-#     UPDATE_INFO=$(curl --silent --fail "https://registry.npmjs.org/@crestron/ch5-crcomlib/latest")
-#     CH5_COMMIT=$(echo "${UPDATE_INFO}" | jq -r '.commit')
-#     CH5_VERSION=$(echo "${UPDATE_INFO}" | jq -r '.version')
-# elif [[ -z "${CH5_COMMIT}" ]]; then
-#     REFERENCE=$(git ls-remote --tags | grep -x ".*refs\/tags\/${CH5_VERSION}" | head -1)
-
-#     if [[ -z "${REFERENCE}" ]]; then
-#         echo "Error: The following tag can't be found: ${CH5_VERSION}"
-#         exit 1
-#     elif [[ "${REFERENCE}" =~ ^([[:alnum:]]+)[[:space:]]+refs\/tags\/([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
-#         CH5_COMMIT="${BASH_REMATCH[1]}"
-#         CH5_VERSION="${BASH_REMATCH[2]}"
-#     else
-#         echo "Error: The following reference can't be parsed: ${REFERENCE}"
-#         exit 1
-#     fi
-# fi
-
 echo "CH5_VERSION=\"${CH5_VERSION}\""
 echo "CH5_COMMIT=\"${CH5_COMMIT}\""
 
