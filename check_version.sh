@@ -9,11 +9,10 @@ if [[ -z "${GITHUB_TOKEN}" ]]; then
 fi
 
 APP_NAME_LC="$(echo "${APP_NAME}" | awk '{print tolower($0)}')"
-GITHUB_RESPONSE=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/${ASSETS_REPOSITORY}/releases/latest")
-LATEST_VERSION=$(echo "${GITHUB_RESPONSE}" | jq -c -r '.tag_name')
+LATEST_VERSION=$(curl --silent --fail "https://registry.npmjs.org/@crestron/ch5-crcomlib/latest" | jq -r '.version')
 
 if [[ "${LATEST_VERSION}" =~ ^([0-9]+\.[0-9]+\.[0-9]+) ]]; then
-    if [[ "${CH5_TAG}" != "${BASH_REMATCH[1]}" ]]; then
+    if [[ "${CH5_VERSION}" != "${BASH_REMATCH[1]}" ]]; then
         echo "New CH5 version, new build"
         export SHOULD_BUILD="yes"
     elif [[ "${NEW_RELEASE}" == "true" ]]; then
