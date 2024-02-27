@@ -10,8 +10,8 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
 
     . prepare_ch5componentlibrary.sh
 
-    cd CH5ComponentLibrary || {
-        echo "'CH5ComponentLibrary' dir not found"
+    cd ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT} || {
+        echo "'${UPSTREAM_PROJECT}' dir not found"
         exit 1
     }
 

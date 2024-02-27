@@ -3,6 +3,11 @@
 
 set -e
 
+export UPSTREAM_AUTHOR=Crestron
+export UPSTREAM_PROJECT=CH5ComponentLibrary
+export UPSTREAM_REPO=https://github.com/${UPSTREAM_AUTHOR}/${UPSTREAM_PROJECT}.git
+export UPSTREAM_NPM_PACKAGE_ENDPOINT=https://registry.npmjs.org/@crestron/ch5-crcomlib/latest
+
 # git workaround
 if [[ "${CI_BUILD}" != "no" ]]; then
     git config --global --add safe.directory "/__w/$(echo "${GITHUB_REPOSITORY}" | awk '{print tolower($0)}')"
@@ -22,7 +27,7 @@ fi
 if [[ -z "${RELEASE_VERSION}" ]]; then
     if [[ "${CH5_LATEST}" == "yes" ]] || [[ ! -f version.json ]]; then
         echo "Retrieve lastest version"
-        UPDATE_INFO=$(curl --silent --fail "https://registry.npmjs.org/@crestron/ch5-crcomlib/latest")
+        UPDATE_INFO=$(curl --silent --fail "${UPSTREAM_NPM_PACKAGE_ENDPOINT}")
     else
         echo "Get version from version.json"
         CH5_VERSION=$(jq -r '.version' version.json)
@@ -51,14 +56,14 @@ fi
 
 echo "RELEASE_VERSION=\"${RELEASE_VERSION}\""
 
-mkdir -p CH5ComponentLibrary
-cd CH5ComponentLibrary || {
-    echo "'CH5ComponentLibrary' dir not found"
+mkdir -p ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT}
+cd ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT} || {
+    echo "'${UPSTREAM_PROJECT}' dir not found"
     exit 1
 }
 
 git init -q
-git remote add origin https://github.com/Crestron/CH5ComponentLibrary.git
+git remote add origin ${UPSTREAM_REPO}
 
 echo "CH5_VERSION=\"${CH5_VERSION}\""
 echo "CH5_COMMIT=\"${CH5_COMMIT}\""

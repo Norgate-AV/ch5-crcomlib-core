@@ -41,10 +41,10 @@ jobs:
       - name: Show Environment
         run: env | sort
 
-      - name: Clone CH5ComponentLibrary Repository
+      - name: Get Remote
         run: . get_repo.sh
 
-      - name: Check existing CH5ComponentLibrary version
+      - name: Check Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEW_RELEASE: ${{ github.event.inputs.new_release }}
@@ -57,7 +57,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./build.sh
 
-      - name: Update version.json
+      - name: Update Version
         if: env.SHOULD_BUILD == 'yes' && github.event.inputs.dont_update != 'true'
         run: ./update_version.sh
         env:

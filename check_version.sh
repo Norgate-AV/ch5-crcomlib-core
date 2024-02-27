@@ -9,7 +9,7 @@ if [[ -z "${GITHUB_TOKEN}" ]]; then
 fi
 
 APP_NAME_LC="$(echo "${APP_NAME}" | awk '{print tolower($0)}')"
-LATEST_VERSION=$(curl --silent --fail "https://registry.npmjs.org/@crestron/ch5-crcomlib/latest" | jq -r '.version')
+LATEST_VERSION=$(curl --silent --fail "${UPSTREAM_NPM_PACKAGE_ENDPOINT}" | jq -r '.version')
 
 if [[ "${LATEST_VERSION}" =~ ^([0-9]+\.[0-9]+\.[0-9]+) ]]; then
     if [[ "${CH5_VERSION}" != "${BASH_REMATCH[1]}" ]]; then

@@ -9,8 +9,8 @@ set -e
 # cp -rp src/stable/* vscode/
 # cp -f LICENSE vscode/LICENSE.txt
 
-cd CH5ComponentLibrary || {
-    echo "'CH5ComponentLibrary' dir not found"
+cd ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT} || {
+    echo "'${UPSTREAM_PROJECT}' dir not found"
     exit 1
 }
 
