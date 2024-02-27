@@ -29,7 +29,7 @@ done
 
 set -x
 
-CHILD_CONCURRENCY=1 yarn --frozen-lockfile --check-files --network-timeout 180000
+npm install
 
 setpath() {
     local jsonTmp
