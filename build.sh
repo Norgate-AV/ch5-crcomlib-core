@@ -17,5 +17,7 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
 
     npm run build:prod_all
 
+    ls -la ./dist
+
     cd ..
 fi

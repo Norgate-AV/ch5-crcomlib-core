@@ -6,8 +6,8 @@ set -e
 # include common functions
 . ./utils.sh
 
-# cp -rp src/stable/* vscode/
-# cp -f LICENSE vscode/LICENSE.txt
+cp -rp src/stable/* vscode/
+cp -f LICENSE vscode/LICENSE.txt
 
 cd CH5ComponentLibrary || {
     echo "'CH5ComponentLibrary' dir not found"
@@ -54,5 +54,7 @@ setpath "package" "version" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.(
 setpath "package" "release" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\2/p")"
 
 replace 's|Crestron|Norgate AV|' package.json
+
+cat package.json
 
 cd ..

@@ -19,6 +19,8 @@ echo "${jsonTmp}" >"version.json" && unset jsonTmp
 # git config user.name "${GITHUB_USERNAME} CI"
 # git add .
 
+cat version.json
+
 CHANGES=$(git status --porcelain)
 echo "CHANGE=${CHANGES}"
 # if [[ -n "${CHANGES}" ]]; then
