@@ -3,10 +3,10 @@
 
 set -e
 
-export UPSTREAM_AUTHOR=Crestron
-export UPSTREAM_PROJECT=CH5ComponentLibrary
-export UPSTREAM_REPO=https://github.com/${UPSTREAM_AUTHOR}/${UPSTREAM_PROJECT}.git
-export UPSTREAM_NPM_PACKAGE_ENDPOINT=https://registry.npmjs.org/@crestron/ch5-crcomlib/latest
+UPSTREAM_AUTHOR=Crestron
+UPSTREAM_PROJECT=CH5ComponentLibrary
+UPSTREAM_REPO=https://github.com/${UPSTREAM_AUTHOR}/${UPSTREAM_PROJECT}.git
+UPSTREAM_NPM_PACKAGE_ENDPOINT=https://registry.npmjs.org/@crestron/ch5-crcomlib/latest
 
 # git workaround
 if [[ "${CI_BUILD}" != "no" ]]; then
@@ -83,3 +83,7 @@ fi
 export CH5_VERSION
 export CH5_COMMIT
 export RELEASE_VERSION
+export UPSTREAM_AUTHOR
+export UPSTREAM_PROJECT
+export UPSTREAM_REPO
+export UPSTREAM_NPM_PACKAGE_ENDPOINT
