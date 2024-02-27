@@ -38,6 +38,9 @@ jobs:
           node-version-file: .nvmrc
           cache: "pnpm"
 
+      - name: Show Environment
+        run: env | sort
+
       - name: Clone CH5ComponentLibrary Repository
         run: . get_repo.sh
 
