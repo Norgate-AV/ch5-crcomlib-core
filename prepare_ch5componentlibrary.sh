@@ -6,8 +6,8 @@ set -e
 # include common functions
 . ./utils.sh
 
-cp -rp src/stable/* vscode/
-cp -f LICENSE vscode/LICENSE.txt
+# cp -rp src/stable/* vscode/
+# cp -f LICENSE vscode/LICENSE.txt
 
 cd CH5ComponentLibrary || {
     echo "'CH5ComponentLibrary' dir not found"
