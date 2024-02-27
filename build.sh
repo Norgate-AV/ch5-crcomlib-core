@@ -15,7 +15,7 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
         exit 1
     }
 
-    yarn build:prod_all
+    npm run build:prod_all
 
     cd ..
 fi

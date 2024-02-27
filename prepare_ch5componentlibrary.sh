@@ -55,6 +55,4 @@ setpath "package" "release" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.(
 
 replace 's|Crestron|Norgate AV|' package.json
 
-# ../undo_telemetry.sh
-
 cd ..
