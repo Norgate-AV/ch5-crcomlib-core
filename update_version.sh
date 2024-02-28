@@ -17,7 +17,6 @@ echo "${jsonTmp}" >${DOWNSTREAM_VERSION_FILE} && unset jsonTmp
 
 git config user.email "$(echo "${GITHUB_USERNAME}" | awk '{print tolower($0)}')-ci@not-real.com"
 git config user.name "${GITHUB_USERNAME} CI"
-git add .
 
 cat ${DOWNSTREAM_VERSION_FILE}
 
@@ -25,7 +24,7 @@ CHANGES=$(git status --porcelain)
 echo "CHANGE=${CHANGES}"
 
 if [[ -n "${CHANGES}" ]]; then
-    git commit -m "build: update to commit ${CH5_COMMIT:0:7}"
+    git commit -am "build: update to commit ${CH5_COMMIT:0:7}"
     git tag "${RELEASE_VERSION}"
 
     BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
