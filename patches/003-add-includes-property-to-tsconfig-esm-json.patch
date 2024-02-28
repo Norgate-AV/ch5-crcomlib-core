@@ -10,5 +10,5 @@ index 93f88a6e..87c4fa30 100644
 -}
 \ No newline at end of file
 +  },
-+  "includes": ["src/**/*.ts"]
++  "includes": ["src/**/*"]
 +}
