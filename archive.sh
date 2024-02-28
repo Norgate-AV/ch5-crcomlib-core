@@ -3,7 +3,7 @@
 
 set -e
 
-npm install -g checksum
+pnpm add -g checksum
 
 sum_file() {
     if [[ -f "${1}" ]]; then

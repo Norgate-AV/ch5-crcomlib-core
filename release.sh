@@ -10,7 +10,7 @@ fi
 REPOSITORY_OWNER="${ASSETS_REPOSITORY/\/*/}"
 REPOSITORY_NAME="${ASSETS_REPOSITORY/*\//}"
 
-npm install -g github-release-cli
+pnpm add -g github-release-cli
 
 if [[ $(gh release view --repo "${ASSETS_REPOSITORY}" "${RELEASE_VERSION}" 2>&1) =~ "release not found" ]]; then
     echo "Creating release '${RELEASE_VERSION}'"

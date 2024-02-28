@@ -84,7 +84,7 @@ git checkout FETCH_HEAD
 
 cd ${GITHUB_WORKSPACE} || ..
 
-# for GH actions
+# Add to GH Actions environment
 if [[ "${GITHUB_ENV}" ]]; then
     echo "CH5_VERSION=${CH5_VERSION}" >>"${GITHUB_ENV}"
     echo "CH5_COMMIT=${CH5_COMMIT}" >>"${GITHUB_ENV}"

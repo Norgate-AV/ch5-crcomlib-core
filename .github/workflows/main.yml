@@ -5,7 +5,7 @@ on:
     inputs:
       new_release:
         type: boolean
-        description: Force new Release
+        description: Force Release
       dont_update:
         type: boolean
         description: Don't update
@@ -23,6 +23,7 @@ jobs:
       VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
       CH5_LATEST: ${{ github.event.inputs.dont_update == 'true' && 'no' || 'yes' }}
       SHOULD_BUILD: ${{ github.event.inputs.new_release == 'true' && 'yes' || 'no' }}
+      SHOULD_PUBLISH: "no"
 
     steps:
       - name: Checkout
@@ -78,3 +79,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
+
+      - name: Publish
+        if: env.SHOULD_PUBLISH == 'yes'
+        run: ./publish.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ github.repository_owner }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
