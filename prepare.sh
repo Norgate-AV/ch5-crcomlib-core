@@ -26,6 +26,11 @@ for file in ../patches/*.patch; do
     fi
 done
 
+build_date=$(date +%Y-%m-%d)
+sed -i -E "s|\!\!process\.env\.BUILD_DATE\s+\?\s+process\.env\.BUILD_DATE\s+:\s+'BUILD_DATE_INVALID'|'${build_date}'|g" src/ch5-core/ch5-version.ts
+sed -i -E "s|\!\!process\.env\.BUILD_VERSION\s+\?\s+process\.env\.BUILD_VERSION\s+:\s+'VERSION_NOT_SET'|'${CH5_VERSION}'|g" src/ch5-core/ch5-version.ts
+cat src/ch5-core/ch5-version.ts
+
 set -x
 
 npm install
