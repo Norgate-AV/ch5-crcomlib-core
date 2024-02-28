@@ -51,9 +51,9 @@ cp package.json{,.bak}
 
 setpath "package" "name" "@norgate-av/ch5-crcomlib"
 setpath "package" "version" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\1/p")"
-setpath "package" "author" "Norgate AV"
+setpath "package" "author" "${DOWNSTREAM_AUTHOR}"
 setpath "package" "license" "MIT"
-setpath_json "package" "repository" "{ \"type\": \"git\", \"url\": \"https://github.com/Norgate-AV/ch5-crcomlib-core.git\" }"
+setpath_json "package" "repository" "{ \"type\": \"git\", \"url\": \"${DOWNSTREAM_REPO}\" }"
 
 cat package.json
 

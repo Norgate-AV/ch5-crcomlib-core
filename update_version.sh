@@ -3,23 +3,23 @@
 set -e
 
 if [[ "${SHOULD_BUILD}" != "yes" ]]; then
-    echo "Will not update version.json because we did not build"
+    echo "Will not update ${DOWNSTREAM_VERSION_FILE} because we did not build"
     exit 0
 fi
 
 if [[ -z "${GITHUB_TOKEN}" ]]; then
-    echo "Will not update version.json because no GITHUB_TOKEN defined"
+    echo "Will not update ${DOWNSTREAM_VERSION_FILE} because no GITHUB_TOKEN defined"
     exit 0
 fi
 
-jsonTmp=$(cat "version.json" | jq --arg 'version' "${CH5_VERSION}" --arg 'commit' "${CH5_COMMIT}" '. | .version=$version | .commit=$commit')
-echo "${jsonTmp}" >"version.json" && unset jsonTmp
+jsonTmp=$(cat ${DOWNSTREAM_VERSION_FILE} | jq --arg 'version' "${CH5_VERSION}" --arg 'commit' "${CH5_COMMIT}" '. | .version=$version | .commit=$commit')
+echo "${jsonTmp}" >${DOWNSTREAM_VERSION_FILE} && unset jsonTmp
 
 # git config user.email "$(echo "${GITHUB_USERNAME}" | awk '{print tolower($0)}')-ci@not-real.com"
 # git config user.name "${GITHUB_USERNAME} CI"
 # git add .
 
-cat version.json
+cat ${DOWNSTREAM_VERSION_FILE}
 
 CHANGES=$(git status --porcelain)
 echo "CHANGE=${CHANGES}"

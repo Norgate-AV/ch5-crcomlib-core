@@ -15,12 +15,10 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
         exit 1
     }
 
-    # npm run build:prod_all
-    npm run build:prod:esm
-    npm run build:prod:esm-no-ce
+    npm run build:prod_all
 
     pwd
-    ls -la ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT}/build_bundles
+    ls -la ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT}/${UPSTREAM_PROJECT_BUILD_DIR}
 
     cd ${GITHUB_WORKSPACE} || ..
 fi
