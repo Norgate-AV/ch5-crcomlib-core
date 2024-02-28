@@ -3,12 +3,12 @@
 
 set -ex
 
-. version.sh
+. get_build_version.sh
 
 if [[ "${SHOULD_BUILD}" == "yes" ]]; then
     echo "CH5_COMMIT=\"${CH5_COMMIT}\""
 
-    . prepare_ch5componentlibrary.sh
+    . prepare.sh
 
     cd ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT} || {
         echo "'${UPSTREAM_PROJECT}' dir not found"
@@ -20,7 +20,7 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
     npm run build:prod:esm-no-ce
 
     pwd
-    ls -la ./build_bundles
+    ls -la ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT}/build_bundles
 
     cd ${GITHUB_WORKSPACE} || ..
 fi
