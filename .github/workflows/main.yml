@@ -48,21 +48,28 @@ jobs:
         run: . get_repo.sh
 
       - name: Check Version
+        run: . check_version.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEW_RELEASE: ${{ github.event.inputs.new_release }}
           IS_SPEARHEAD: "yes"
-        run: . check_version.sh
 
       - name: Build
         if: env.SHOULD_BUILD == 'yes'
+        run: ./build.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./build.sh
 
       - name: Update Version
         if: env.SHOULD_BUILD == 'yes' && github.event.inputs.dont_update != 'true'
         run: ./update_version.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ github.repository_owner }}
+
+      - name: Release
+        if: env.SHOULD_BUILD == 'yes'
+        run: ./release.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
