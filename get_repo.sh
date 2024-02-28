@@ -12,7 +12,7 @@ UPSTREAM_NPM_PACKAGE_ENDPOINT=https://registry.npmjs.org/${UPSTREAM_NPM_PACKAGE}
 UPSTREAM_NPM_PACKAGE_VERSION=latest
 
 DOWNSTREAM_AUTHOR="Norgate AV"
-DOWNSTREAM_AUTHOR_KEBAB=$(echo "${DOWNSTREAM_AUTHOR}" | awk '{print tolower($0)}')-$(echo "${DOWNSTREAM_AUTHOR}" | awk '{print tolower($1)}')
+DOWNSTREAM_AUTHOR_KEBAB=$(echo "${DOWNSTREAM_AUTHOR}" | awk '{print tolower($1)}')-$(echo "${DOWNSTREAM_AUTHOR}" | awk '{print tolower($2)}')
 DOWNSTREAM_PROJECT=ch5-crcomlib-core
 DOWNSTREAM_REPO=https://github.com/${DOWNSTREAM_AUTHOR_KEBAB}/${DOWNSTREAM_PROJECT}.git
 DOWNSTREAM_NPM_PACKAGE=@norgate-av/ch5-crcomlib-core
