@@ -13,9 +13,9 @@ UPSTREAM_NPM_PACKAGE_VERSION=latest
 
 DOWNSTREAM_AUTHOR="Norgate AV"
 DOWNSTREAM_AUTHOR_KEBAB=$(echo "${DOWNSTREAM_AUTHOR}" | awk '{print tolower($1)}')-$(echo "${DOWNSTREAM_AUTHOR}" | awk '{print tolower($2)}')
-DOWNSTREAM_PROJECT=ch5-crcomlib-core
+DOWNSTREAM_PROJECT=ch5-crcomlib
 DOWNSTREAM_REPO=https://github.com/${DOWNSTREAM_AUTHOR_KEBAB}/${DOWNSTREAM_PROJECT}.git
-DOWNSTREAM_NPM_PACKAGE=@norgate-av/ch5-crcomlib-core
+DOWNSTREAM_NPM_PACKAGE=@norgate-av/ch5-crcomlib
 DOWNSTREAM_NPM_PACKAGE_ENDPOINT=https://registry.npmjs.org/${DOWNSTREAM_NPM_PACKAGE}
 DOWNSTREAM_VERSION_FILE=version.json
 
@@ -36,7 +36,7 @@ if [[ -n "${PULL_REQUEST_ID}" ]]; then
 fi
 
 if [[ -z "${RELEASE_VERSION}" ]]; then
-    if [[ "${CH5_LATEST}" == "yes" ]] || [[ ! -f version.json ]]; then
+    if [[ "${CH5_LATEST}" == "yes" ]] || [[ ! -f ${DOWNSTREAM_VERSION_FILE} ]]; then
         echo "Retrieve lastest version"
         UPDATE_INFO=$(curl --silent --fail "${UPSTREAM_NPM_PACKAGE_ENDPOINT}/${UPSTREAM_NPM_PACKAGE_VERSION}")
     else

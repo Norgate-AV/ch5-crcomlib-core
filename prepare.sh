@@ -49,7 +49,7 @@ setpath_json() {
 # package.json
 cp package.json{,.bak}
 
-setpath "package" "name" "@norgate-av/ch5-crcomlib"
+setpath "package" "name" "${DOWNSTREAM_NPM_PACKAGE}"
 setpath "package" "version" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\1/p")"
 setpath "package" "author" "${DOWNSTREAM_AUTHOR}"
 setpath "package" "license" "MIT"

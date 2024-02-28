@@ -15,8 +15,8 @@ sum_file() {
 
 mkdir -p assets
 
-git archive --format tar.gz --output="./assets/${APP_NAME}-${RELEASE_VERSION}-src.tar.gz" HEAD
-git archive --format zip --output="./assets/${APP_NAME}-${RELEASE_VERSION}-src.zip" HEAD
+git archive --format tar.gz --output="./assets/${APP_NAME}-${RELEASE_VERSION}.tar.gz" HEAD
+git archive --format zip --output="./assets/${APP_NAME}-${RELEASE_VERSION}.zip" HEAD
 
 cd assets
 

@@ -18,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      APP_NAME: ch5-crcomlib-core
+      APP_NAME: ch5-crcomlib
+      ASSETS_REPOSITORY: ${{ github.repository }}
       VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
       CH5_LATEST: ${{ github.event.inputs.dont_update == 'true' && 'no' || 'yes' }}
       SHOULD_BUILD: ${{ github.event.inputs.new_release == 'true' && 'yes' || 'no' }}
