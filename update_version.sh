@@ -29,10 +29,10 @@ if [[ -n "${CHANGES}" ]]; then
 
     BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 
-    if ! git push origin "${BRANCH_NAME}" --quiet; then
+    if ! git push origin "${BRANCH_NAME}" --quiet && ! git push origin ${RELEASE_VERSION} --quiet; then
         git pull origin "${BRANCH_NAME}"
         git push origin "${BRANCH_NAME}" --quiet
-        git push --tags --quiet
+        git push origin ${RELEASE_VERSION} --quiet
     fi
 fi
 pwd

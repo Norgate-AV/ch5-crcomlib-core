@@ -67,6 +67,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
 
+      - name: Archive
+        if: env.SHOULD_BUILD == 'yes'
+        run: ./archive.sh
+
       - name: Release
         if: env.SHOULD_BUILD == 'yes'
         run: ./release.sh
