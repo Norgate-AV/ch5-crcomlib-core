@@ -28,13 +28,12 @@ echo "CHANGE=${CHANGES}"
 
 if [[ -n "${CHANGES}" ]]; then
     git commit -am "build: update to commit ${CH5_COMMIT:0:7}"
-    git tag "${RELEASE_VERSION}"
+    git tag -a "${RELEASE_VERSION}" -m "${RELEASE_VERSION}"
 
     BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 
-    if ! git push origin "${BRANCH_NAME}" --quiet && git push origin "${RELEASE_VERSION}" --quiet; then
+    if ! git push origin "${BRANCH_NAME}" --follow-tags --quiet; then
         git pull origin "${BRANCH_NAME}"
-        git push origin "${BRANCH_NAME}" --quiet
-        git push origin "${RELEASE_VERSION}" --quiet
+        git push origin "${BRANCH_NAME}" --follow-tags --quiet
     fi
 fi
