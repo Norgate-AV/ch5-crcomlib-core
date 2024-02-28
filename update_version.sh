@@ -15,6 +15,9 @@ fi
 jsonTmp=$(cat ${DOWNSTREAM_VERSION_FILE} | jq --arg 'version' "${CH5_VERSION}" --arg 'commit' "${CH5_COMMIT}" '. | .version=$version | .commit=$commit')
 echo "${jsonTmp}" >${DOWNSTREAM_VERSION_FILE} && unset jsonTmp
 
+jsonTmp=$(cat ${DOWNSTREAM_VERSION_FILE} | jq --arg 'release' "${RELEASE_VERSION}" --arg 'build' "${BUILD_SOURCEVERSION}" '. | .release=$release | .build=$build')
+echo "${jsonTmp}" >${DOWNSTREAM_VERSION_FILE} && unset jsonTmp
+
 git config user.email "$(echo "${GITHUB_USERNAME}" | awk '{print tolower($0)}')-ci@not-real.com"
 git config user.name "${GITHUB_USERNAME} CI"
 
@@ -29,11 +32,9 @@ if [[ -n "${CHANGES}" ]]; then
 
     BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 
-    if ! git push origin "${BRANCH_NAME}" --quiet && ! git push origin ${RELEASE_VERSION} --quiet; then
+    if ! git push origin "${BRANCH_NAME}" --quiet && git push origin "${RELEASE_VERSION}" --quiet; then
         git pull origin "${BRANCH_NAME}"
         git push origin "${BRANCH_NAME}" --quiet
-        git push origin ${RELEASE_VERSION} --quiet
+        git push origin "${RELEASE_VERSION}" --quiet
     fi
 fi
-pwd
-# cd ..
