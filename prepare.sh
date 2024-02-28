@@ -53,7 +53,7 @@ setpath "package" "name" "@norgate-av/ch5-crcomlib"
 setpath "package" "version" "$(echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)$/\1/p")"
 setpath "package" "author" "Norgate AV"
 setpath "package" "license" "MIT"
-setpath_json "package" "repository.url" "https://github.com/Norgate-AV/ch5-crcomlib-core.git"
+setpath_json "package" "repository" "{ \"type\": \"git\", \"url\": \"https://github.com/Norgate-AV/ch5-crcomlib-core.git\" }"
 
 cat package.json
 
