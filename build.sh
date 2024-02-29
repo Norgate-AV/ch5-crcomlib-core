@@ -23,7 +23,7 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
     npm run build:prod_all
 
     pwd
-    ls -la ${UPSTREAM_PROJECT}/${UPSTREAM_PROJECT_BUILD_DIR}
+    ls -la ${UPSTREAM_PROJECT_BUILD_DIR}
 
     cd ${SCRIPT_DIR}
 fi
