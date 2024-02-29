@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+function get_script_dir() {
+    local scriptDir
+    scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    echo "${scriptDir}"
+}
+
 exists() { type -t "$1" &>/dev/null; }
 
 is_gnu_sed() {

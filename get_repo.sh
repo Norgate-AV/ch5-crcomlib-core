@@ -3,6 +3,11 @@
 
 set -e
 
+. ./utils.sh
+
+SCRIPT_DIR=$(get_script_dir)
+echo "SCRIPT_DIR=${SCRIPT_DIR}"
+
 UPSTREAM_AUTHOR=Crestron
 UPSTREAM_PROJECT=CH5ComponentLibrary
 UPSTREAM_PROJECT_BUILD_DIR=build_bundles
@@ -67,8 +72,8 @@ fi
 
 echo "RELEASE_VERSION=\"${RELEASE_VERSION}\""
 
-mkdir -p ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT}
-cd ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT} || {
+[[ ! -d ${UPSTREAM_PROJECT} ]] && mkdir -p ${UPSTREAM_PROJECT}
+cd ${UPSTREAM_PROJECT} || {
     echo "'${UPSTREAM_PROJECT}' dir not found"
     exit 1
 }
@@ -82,7 +87,7 @@ echo "CH5_COMMIT=\"${CH5_COMMIT}\""
 git fetch --depth 1 origin "${CH5_COMMIT}"
 git checkout FETCH_HEAD
 
-cd ${GITHUB_WORKSPACE} || ..
+cd ${SCRIPT_DIR}
 
 # Add to GH Actions environment
 if [[ "${GITHUB_ENV}" ]]; then

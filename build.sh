@@ -3,6 +3,11 @@
 
 set -ex
 
+. ./utils.sh
+
+SCRIPT_DIR=$(get_script_dir)
+echo "SCRIPT_DIR=${SCRIPT_DIR}"
+
 . get_build_version.sh
 
 if [[ "${SHOULD_BUILD}" == "yes" ]]; then
@@ -10,7 +15,7 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
 
     . prepare.sh
 
-    cd ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT} || {
+    cd ${UPSTREAM_PROJECT} || {
         echo "'${UPSTREAM_PROJECT}' dir not found"
         exit 1
     }
@@ -18,7 +23,7 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
     npm run build:prod_all
 
     pwd
-    ls -la ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT}/${UPSTREAM_PROJECT_BUILD_DIR}
+    ls -la ${UPSTREAM_PROJECT}/${UPSTREAM_PROJECT_BUILD_DIR}
 
-    cd ${GITHUB_WORKSPACE} || ..
+    cd ${SCRIPT_DIR}
 fi

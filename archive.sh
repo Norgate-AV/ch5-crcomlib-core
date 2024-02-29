@@ -3,6 +3,11 @@
 
 set -e
 
+. ./utils.sh
+
+SCRIPT_DIR=$(get_script_dir)
+echo "SCRIPT_DIR=${SCRIPT_DIR}"
+
 pnpm add -g checksum
 
 sum_file() {
@@ -13,7 +18,7 @@ sum_file() {
     fi
 }
 
-mkdir -p assets
+[[ ! -d "assets" ]] && mkdir -p assets
 
 git archive --format tar.gz --output="./assets/${APP_NAME}-${RELEASE_VERSION}.tar.gz" HEAD
 git archive --format zip --output="./assets/${APP_NAME}-${RELEASE_VERSION}.zip" HEAD
@@ -26,4 +31,4 @@ for FILE in *; do
     fi
 done
 
-cd ..
+cd ${SCRIPT_DIR}

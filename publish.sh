@@ -14,7 +14,7 @@ fi
 
 pnpm add -g @jsdevtools/npm-publish
 
-if ! npm-publish --token "${NPM_TOKEN}" --tag "${CH5_VERSION}" --access public --debug --dry-run "${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT}/package.json"; then
+if ! npm-publish --token "${NPM_TOKEN}" --tag "${CH5_VERSION}" --access public --debug --dry-run "${UPSTREAM_PROJECT}/package.json"; then
     echo "Failed to publish to npm"
     exit 1
 fi

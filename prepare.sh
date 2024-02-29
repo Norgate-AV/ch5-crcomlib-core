@@ -5,10 +5,13 @@ set -e
 
 . ./utils.sh
 
+SCRIPT_DIR=$(get_script_dir)
+echo "SCRIPT_DIR=${SCRIPT_DIR}"
+
 # Copy Files
 cp -f LICENSE ${UPSTREAM_PROJECT}/LICENSE
 
-cd ${GITHUB_WORKSPACE}/${UPSTREAM_PROJECT} || {
+cd ${UPSTREAM_PROJECT} || {
     echo "'${UPSTREAM_PROJECT}' dir not found"
     exit 1
 }
@@ -48,4 +51,4 @@ setpath_json "package" "repository" "{ \"type\": \"git\", \"url\": \"${DOWNSTREA
 
 cat package.json
 
-cd ${GITHUB_WORKSPACE} || ..
+cd ${SCRIPT_DIR}

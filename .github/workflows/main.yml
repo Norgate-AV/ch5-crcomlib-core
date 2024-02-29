@@ -62,6 +62,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Test
+        run: ./test.sh
+
       - name: Update Version
         if: env.SHOULD_BUILD == 'yes' && github.event.inputs.dont_update != 'true'
         run: ./update_version.sh
