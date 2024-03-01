@@ -6,9 +6,23 @@ on:
       new_release:
         type: boolean
         description: Force Release
+        default: false
       dont_update:
         type: boolean
-        description: Don't update
+        description: Don't Update
+        default: true
+      dont_archive:
+        type: boolean
+        description: Don't Archive
+        default: true
+      dont_release:
+        type: boolean
+        description: Don't Release
+        default: true
+      dont_publish:
+        type: boolean
+        description: Don't Publish
+        default: true
 
   # schedule:
   #   - cron: "0 18 * * *"
@@ -63,6 +77,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
+        if: env.SHOULD_BUILD == 'yes'
         run: ./test.sh
 
       - name: Update Version
@@ -73,18 +88,18 @@ jobs:
           GITHUB_USERNAME: ${{ github.repository_owner }}
 
       - name: Archive
-        if: env.SHOULD_BUILD == 'yes'
+        if: env.SHOULD_BUILD == 'yes' && github.event.inputs.dont_archive != 'true'
         run: ./archive.sh
 
       - name: Release
-        if: env.SHOULD_BUILD == 'yes'
+        if: env.SHOULD_BUILD == 'yes' && github.event.inputs.dont_release != 'true'
         run: ./release.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
 
       - name: Publish
-        if: env.SHOULD_PUBLISH == 'yes'
+        if: env.SHOULD_PUBLISH == 'yes' && github.event.inputs.dont_publish != 'true'
         run: ./publish.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
