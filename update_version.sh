@@ -18,6 +18,8 @@ echo "${jsonTmp}" >${DOWNSTREAM_VERSION_FILE} && unset jsonTmp
 jsonTmp=$(cat ${DOWNSTREAM_VERSION_FILE} | jq --arg 'release' "${RELEASE_VERSION}" --arg 'build' "${BUILD_SOURCEVERSION}" '. | .release=$release | .build=$build')
 echo "${jsonTmp}" >${DOWNSTREAM_VERSION_FILE} && unset jsonTmp
 
+sed -i -E "s|\"version\":\s*\".*\"|\"version\": \"${RELEASE_VERSION}\"|g" package.json
+
 git config user.email "$(echo "${GITHUB_USERNAME}" | awk '{print tolower($0)}')-ci@not-real.com"
 git config user.name "${GITHUB_USERNAME} CI"
 
