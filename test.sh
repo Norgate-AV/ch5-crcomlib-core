@@ -14,8 +14,8 @@ cd test-vite-app
 pnpm install
 pnpm add ../${UPSTREAM_PROJECT}
 
-sed -i -E "1s|^|import \{ publishEvent, isCrestronTouchScreen \} from \"@norgate-av\/ch5-crcomlib\";\n|" src/App.tsx
-sed -i -E "s|<p>|<button onClick=\{() => publishEvent\(\"b\", \"1\", true\);\}>Test Event</button>\n<p>|g" src/App.tsx
+sed -i -E "1s|^|import \{ publishEvent \} from \"@norgate-av\/ch5-crcomlib\";\n|" src/App.tsx
+sed -i -E "s|<p>|<button onClick=\{() => publishEvent\(\"b\", \"1\", true\)\}>Test Event</button>\n<p>|g" src/App.tsx
 
 pnpm build
 
